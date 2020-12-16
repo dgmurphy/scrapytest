@@ -10,4 +10,7 @@ class NrgItem(scrapy.Item):
     # define the fields for your item here like:
     src_url = scrapy.Field()
     paragraphs = scrapy.Field()
+    html = scrapy.Field()
+    ingest_date = scrapy.Field()
+    spider_name = scrapy.Field()
     
