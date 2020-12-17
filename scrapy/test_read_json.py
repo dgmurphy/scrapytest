@@ -1,21 +1,34 @@
 import json 
   
 # Opening JSON file 
-filename = './scrapy/energy-central.json'
+filename = './energy-central.json'
   
+print("reading file.")
+
 with open(filename) as f:
     lines = f.readlines()
 
-# returns JSON object as  
-# a dictionary 
+atline = 0
 data = {}
+goodlines = []
+no_text = 0
 for line in lines:
     data = json.loads(line) 
-    #print(data['src_url'])
+    if len(data['paragraphs']) == 0:
+        no_text = no_text + 1
+    else:
+        goodlines.append(line)
 
-htmldata = data['html']
-print(htmldata)
+    if (atline % 1000) == 0:
+        print("at line: " + str(atline))
 
-with open("./scrapy/out.html",'w') as fh:
-     fh.write(htmldata)
+    atline = atline + 1
 
+print("Read all lines.")
+print(str(no_text) + " with no text.")
+print("writing " + str(len(goodlines)) + " good lines to file.")
+
+with open("../data/energy-central-hascontent.json",'w') as fh:
+    fh.writelines(goodlines)
+
+print("Done")

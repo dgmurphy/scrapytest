@@ -7,6 +7,9 @@ from datetime import datetime
 from scrapy_splash import SplashRequest
 
 
+# SPLASH:
+# docker run -it -p 8050:8050 --rm scrapinghub/splash
+
 class MySpider(CrawlSpider):
 
     MIN_PARAGRAPH_LENGTH = 1
@@ -16,10 +19,10 @@ class MySpider(CrawlSpider):
     allowed_domains = ['energycentral.com']
 
     # start_url_prefix = 'https://energycentral.com/#keywords%3D%26entity_bundles%3D-all%26sort_type%3Ddate_newest%26topics%3D-all%26page%3D'
-    start_url_prefix = 'https://energycentral.com/news/#keywords%3D%26entity_bundles%3Dnode__allnews%26sort_type%3Ddate_newest%26topics%3D-all%26page%3D'
+    start_url_prefix = 'https://energycentral.com/#keywords%3D%26entity_bundles%3D-all%26sort_type%3Ddate_newest%26topics%3D-all%26page%3D'
 
     start_urls = []
-    for n in range(0, 6686):
+    for n in range(0, 10730):
         start_url = start_url_prefix + str(n)
         start_urls.append(start_url)
 
