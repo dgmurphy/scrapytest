@@ -41,9 +41,9 @@ class MySpider(CrawlSpider):
     def parse(self, response):
         
         item = NrgItem() # scrapy.Item()
-        item['src_url'] = response.url
-        item['ingest_date'] = str(datetime.today())
-        item['spider_name'] = self.SPIDER_NAME
+        item['documentURI'] = response.url
+        item['ingestDate'] = str(datetime.today())
+        item['ingestSource'] = self.SPIDER_NAME
 
         content = response.css("div.read-more-left p::text").getall()
         paragraphs = []
@@ -52,7 +52,7 @@ class MySpider(CrawlSpider):
                 paragraphs.append(para)
         
         item['paragraphs'] = paragraphs
-        item['html'] = response.text
+        item['content'] = response.text
         yield(item)
 
         related = response.css('span.article-title a')
